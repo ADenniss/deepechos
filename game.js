@@ -1,0 +1,35 @@
+const canvas = document.querySelector('#game'), ctx = canvas.getContext('2d');
+const overlay = document.querySelector('#message'), start = document.querySelector('#start-button');
+const newCave = document.querySelector('#new-cave'), crystalCount = document.querySelector('#crystal-count');
+const crystalTotal = document.querySelector('#crystal-total'), depth = document.querySelector('#depth');
+const COLS = 45, ROWS = 30, TILE = 20;
+let map, player, crystals, exit, running = false, won = false, pulse = 0;
+
+function makeCave() {
+  map = Array.from({length: ROWS}, (_, y) => Array.from({length: COLS}, (_, x) => x === 0 || y === 0 || x === COLS - 1 || y === ROWS - 1 || Math.random() < .43 ? 1 : 0));
+  for (let pass = 0; pass < 5; pass++) map = map.map((row, y) => row.map((cell, x) => {
+    if (x === 0 || y === 0 || x === COLS - 1 || y === ROWS - 1) return 1;
+    let n = 0; for (let yy = -1; yy <= 1; yy++) for (let xx = -1; xx <= 1; xx++) if (map[y + yy]?.[x + xx]) n++;
+    return n >= 5 ? 1 : 0;
+  }));
+  let x = 2, y = 2; map[y][x] = 0;
+  while (x < COLS - 3 || y < ROWS - 3) { if ((Math.random() < .58 && x < COLS - 3) || y >= ROWS - 3) x++; else y++; map[y][x] = 0; if (Math.random() < .35) map[Math.max(1, y - 1)][x] = 0; }
+  player = {x: 2, y: 2, bob: 0}; exit = {x: COLS - 3, y: ROWS - 3}; crystals = [];
+  const reachable = [], seen = new Set(['2,2']), queue = [{x: 2, y: 2}];
+  while (queue.length) { const p = queue.shift(); reachable.push(p); for (const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]) { const q={x:p.x+dx,y:p.y+dy}, id=`${q.x},${q.y}`; if (!seen.has(id) && !map[q.y]?.[q.x]) { seen.add(id); queue.push(q); } } }
+  for (let i = 0; i < 11; i++) { let p; do p = reachable[Math.floor(Math.random() * reachable.length)]; while (crystals.some(c=>c.x===p.x&&c.y===p.y) || Math.abs(p.x-player.x)+Math.abs(p.y-player.y)<5 || (p.x===exit.x&&p.y===exit.y)); crystals.push(p); }
+  crystalTotal.textContent = crystals.length; crystalCount.textContent = 0; depth.textContent = 300 + Math.floor(Math.random() * 500); won = false;
+}
+function move(dx, dy) { if (!running || won) return; const nx = player.x + dx, ny = player.y + dy; if (!map[ny]?.[nx]) { player.x = nx; player.y = ny; player.bob = .35; const found = crystals.findIndex(c => c.x === nx && c.y === ny); if (found >= 0) { crystals.splice(found, 1); crystalCount.textContent = +crystalCount.textContent + 1; } if (nx === exit.x && ny === exit.y && !crystals.length) victory(); } }
+function victory() { won = true; overlay.innerHTML = '<p class="eyebrow">SIGNAL FOUND</p><h2>You made it out.</h2><p>The cave gives up its last echo as daylight spills through the gate.</p><button id="again">Explore another cave</button>'; overlay.classList.remove('hidden'); document.querySelector('#again').onclick = begin; }
+function draw() {
+  pulse += .04; ctx.fillStyle = '#080d0e'; ctx.fillRect(0, 0, 900, 600);
+  for (let y=0;y<ROWS;y++) for(let x=0;x<COLS;x++) { const px=x*TILE, py=y*TILE; if (map[y][x]) { const seed=(x*17+y*31)%3; ctx.fillStyle=['#182327','#1d2b2d','#132024'][seed]; ctx.fillRect(px,py,TILE,TILE); ctx.fillStyle='#26363a'; ctx.fillRect(px+3,py+3,4,3); } else { ctx.fillStyle='#0e1719'; ctx.fillRect(px,py,TILE,TILE); ctx.strokeStyle='#142124'; ctx.strokeRect(px+.5,py+.5,TILE-1,TILE-1); } }
+  const lit = !crystals.length; ctx.save(); ctx.translate(exit.x*TILE+10, exit.y*TILE+10); ctx.strokeStyle=lit?'#e8d795':'#4f5147'; ctx.lineWidth=3; ctx.strokeRect(-7,-9,14,18); ctx.fillStyle=lit?'#b88e4b':'#232926'; ctx.fillRect(-4,-5,8,12); ctx.restore();
+  crystals.forEach(c=>{ ctx.save(); ctx.shadowBlur=11+Math.sin(pulse+c.x)*2; ctx.shadowColor='#42d9e5'; ctx.fillStyle='#74f0ee'; ctx.beginPath();ctx.moveTo(c.x*TILE+10,c.y*TILE+2);ctx.lineTo(c.x*TILE+15,c.y*TILE+10);ctx.lineTo(c.x*TILE+10,c.y*TILE+18);ctx.lineTo(c.x*TILE+5,c.y*TILE+10);ctx.fill();ctx.restore(); });
+  ctx.save();ctx.translate(player.x*TILE+10,player.y*TILE+11+Math.sin(pulse*4)*player.bob*3);ctx.shadowBlur=12;ctx.shadowColor='#ffcc72';ctx.fillStyle='#f0b65a';ctx.beginPath();ctx.arc(0,-3,5,0,7);ctx.fill();ctx.fillStyle='#295e62';ctx.fillRect(-5,1,10,8);ctx.restore();
+  const gx=player.x*TILE+10, gy=player.y*TILE+10, g=ctx.createRadialGradient(gx,gy,35,gx,gy,145); g.addColorStop(0,'rgba(0,0,0,0)');g.addColorStop(.5,'rgba(0,0,0,.08)');g.addColorStop(1,'rgba(0,0,0,.92)');ctx.fillStyle=g;ctx.fillRect(0,0,900,600); requestAnimationFrame(draw);
+}
+function begin() { makeCave(); overlay.classList.add('hidden'); running = true; }
+window.addEventListener('keydown', e => { const k=e.key.toLowerCase(), dirs={arrowup:[0,-1],w:[0,-1],arrowdown:[0,1],s:[0,1],arrowleft:[-1,0],a:[-1,0],arrowright:[1,0],d:[1,0]}; if (dirs[k]) { e.preventDefault(); if (!e.repeat) move(...dirs[k]); } });
+start.onclick = begin; newCave.onclick = begin; makeCave(); draw();
