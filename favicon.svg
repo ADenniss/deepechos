@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>Deep Echos</title>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop stop-color="#071516"/>
+      <stop offset=".52" stop-color="#173536"/>
+      <stop offset="1" stop-color="#3f756a"/>
+    </linearGradient>
+    <linearGradient id="crystal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop stop-color="#dcfff5"/>
+      <stop offset=".5" stop-color="#69e4d2"/>
+      <stop offset="1" stop-color="#248d89"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="28%" cy="22%" r="48%">
+      <stop stop-color="#73efde" stop-opacity=".5"/>
+      <stop offset="1" stop-color="#73efde" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
+  <rect width="64" height="64" rx="14" fill="url(#glow)"/>
+  <path d="M10 55V35c0-17 8.5-27 22-27s22 10 22 27v20" fill="#061718" fill-opacity=".18" stroke="#b0f4e0" stroke-opacity=".38" stroke-width="1.5"/>
+  <path d="M16 55V36c0-12.5 6-20 16-20s16 7.5 16 20v19" fill="none" stroke="#b0f4e0" stroke-opacity=".19" stroke-width="5"/>
+  <path d="m32 22 10 10-5 22-11-3-5-19 11-10Z" fill="url(#crystal)" stroke="#e9fff9" stroke-opacity=".68" stroke-width="1.2"/>
+  <path d="m32 22 1 28M21 32l12 6 9-6" fill="none" stroke="#effffc" stroke-opacity=".42"/>
+</svg>
