@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>Deep Echos 2D</title>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop stop-color="#0b111d"/>
+      <stop offset=".52" stop-color="#26304a"/>
+      <stop offset="1" stop-color="#604d76"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="75%" cy="22%" r="48%">
+      <stop stop-color="#b38eff" stop-opacity=".64"/>
+      <stop offset="1" stop-color="#b38eff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="crystal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop stop-color="#f3edff"/>
+      <stop offset=".5" stop-color="#ad8ff2"/>
+      <stop offset="1" stop-color="#6650ad"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
+  <rect width="64" height="64" rx="14" fill="url(#glow)"/>
+  <path d="M11 11h42v42H11zM25 11v14H11m28-14v14h14M11 39h14v14m14-14h14M25 25h14v14H25z" fill="none" stroke="#c5e7ff" stroke-opacity=".2" stroke-width="1.5"/>
+  <path d="M18 18h14v7h-7v14h14v7h7" fill="none" stroke="#ddd2ff" stroke-opacity=".68" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m46 39 8 8-8 8-8-8 8-8Z" fill="url(#crystal)" stroke="#f6f1ff" stroke-opacity=".8"/>
+</svg>
