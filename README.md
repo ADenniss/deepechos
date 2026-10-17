@@ -4,11 +4,11 @@ Deep Echoes 2D is a turn-based cave crawler where you collect crystals, manage h
 
 ## Larger cave engine
 
-The game now runs on a purpose-built modern Canvas engine with a smooth following camera and visible-tile rendering. Every map is 64×42 tiles—almost twice the tile area of the original caves—while the 900×600 view follows the explorer through the world. A live minimap in the lower-right corner marks cave walls, breakable resources, crystals, monsters, the exit, the player, and the current camera area.
+The game now runs on a purpose-built modern Canvas engine with a smooth following camera and visible-tile rendering. Every map is 84×56 tiles, with ten connected chambers and broad tunnel networks, while the 900×600 view follows the explorer through the world. A live minimap in the lower-right corner marks cave walls, breakable resources, crystals, monsters, the exit, the player, and the current camera area.
 
 ## Walkable home cave and cave gate
 
-Every run begins inside a walkable Home Cave with finished wood flooring and dedicated sleeping, storage, crafting, forge, living, and cave-gate areas. Walk with WASD, face an object, and press E to interact with it.
+Every run begins inside a much larger walkable Home Cave with finished wood flooring and dedicated sleeping, storage, crafting, forge, living, resident, and cave-gate areas. Walk with WASD, face an object or person, and press E to interact.
 
 - **Bed:** Restores health, hunger, and upgraded armor.
 - **Storage chests:** Store or withdraw wood blocks and food in groups of five. Each chest adds 20 storage spaces.
@@ -16,14 +16,26 @@ Every run begins inside a walkable Home Cave with finished wood flooring and ded
 - **Forge:** Installs equipment and upgrades armor.
 - **Main Cave Gate:** Opens the list of all 20 cave passages.
 
-The home starts with a bed, one chest, crafting bench, forge, crystal lamp, and plank flooring. Crafting additional lamps, chests, a table, four chairs, a rug, and display shelves makes those pieces appear in furnishing slots around the room. Crystal lamps also illuminate their surrounding area.
+## Settlers, conversations, and missions
+
+Five named settlers now live around the Home Cave. Speak to them with E to hear their dialogue, accept a repeatable mission, check progress, and claim rewards. Press J anywhere to open the mission journal.
+
+- **Mira, Cartographer:** Rewards exploring new cave tiles.
+- **Bram, Stonewright:** Rewards breaking resource blocks.
+- **Ilyra, Cave Gardener:** Rewards gathering food.
+- **Kato, Lantern Guard:** Rewards defeating monsters.
+- **Orrin, Echo Scholar:** Rewards collecting crystals.
+
+Each completed mission raises its next tier, grants useful resources or crafted supplies, and adds one renown. The HUD shows active missions and calls out rewards that are ready to claim.
+
+The home starts with a bed, one chest, crafting bench, forge, two crystal lamps, five residents, and plank flooring. Crafting additional lamps, chests, a table, four chairs, a rug, and display shelves makes those pieces appear in furnishing slots around the room. Crystal lamps also illuminate their surrounding area.
 
 Completing a cave increases the descent level and returns you home. If health or hunger runs out, you also wake at home without losing gathered materials.
 
 ## Harvesting and crafting
 
 - Press E to break the resource block or crush the egg directly in front of you. Breaking and crushing give nearby monsters a turn.
-- Five breakable block types now appear: rubble gives wood, ore gives shards, ancient roots give extra wood, geodes give three shards, and fossil blocks may contain preserved food.
+- Nine breakable block types now appear: rubble gives wood, ore gives shards, ancient roots give extra wood, geodes give three shards, and fossil blocks may contain preserved food. Emberstone can hold burst energy, glowcap blocks provide food and wood, ancient metal provides both building material and shards, and sun amber preserves food.
 - Wood bundles are scattered through every cave and are especially common in Verdant, Fungal, Living, Nest, and Mine caves.
 - At the Home Crafting Bench, wood and crystal shards can be turned into armor plates, repair kits, and burst cells.
 - **Smoke Bomb:** Makes every monster lose track of you for 15 steps.
@@ -32,7 +44,14 @@ Completing a cave increases the descent level and returns you home. If health or
 - **Mushroom Stew:** Uses two food and one wood to restore 50 hunger and one heart.
 - **Reinforced Pick:** Permanently doubles rewards from every breakable resource block.
 - **Echo Compass:** Adds an on-screen arrow pointing to the nearest crystal, then the exit.
+- **Healing Tonic:** Restores two hearts immediately.
+- **Sonic Charge:** Defeats ordinary monsters within seven tiles.
+- **Field Camp:** Restores hunger, armor, and one heart underground.
+- **Recall Rope:** Returns you home safely without abandoning gathered supplies.
+- **Mining Charge:** Harvests every resource block within two tiles.
+- **Prospector Charm:** Sometimes adds an extra reward when breaking a block.
 - The bench can also build crystal lamps, storage chests, cavewood tables and chairs, an echo rug, and display shelves.
+- The expanded furnishing catalog adds a glow garden, map table, and echo monument.
 - Armor plates are consumed at the forge to unlock up to three rechargeable armor points.
 - Repair kits restore all armor during a cave run.
 - A burst cell is consumed automatically to add 3 tiles of range to the next lantern burst.
@@ -51,9 +70,11 @@ Completing a cave increases the descent level and returns you home. If health or
 
 - Move with WASD or the arrow keys.
 - Hold Shift while moving to sprint at twice the normal movement speed.
-- Normal walking consumes 1 hunger after every 20 successful steps.
-- Sprinting consumes 1 hunger after every 10 successful steps.
+- Normal walking consumes 1 hunger after every 26 successful steps.
+- Sprinting consumes 1 hunger after every 13 successful steps.
 - Walking into a wall does not count as a step or consume hunger.
+
+The explorer now starts with six hearts and five food. Caves contain more food, fewer monsters, shorter enemy sight ranges, longer damage recovery, more hiding moss, and generous completion bonuses. Healing springs, treasure chests, and echo shrines create useful discoveries between major objectives.
 
 ## Monsters, eggs, and hiding
 
@@ -64,7 +85,7 @@ Completing a cave increases the descent level and returns you home. If health or
 - Broodmothers cannot be defeated by ordinary weapons, so hiding in blue moss is the safe way to let them pass.
 - Broodmothers patrol in real time even while the player stands still. They pause at home and while a menu is open.
 - Beetles and crawlers move only every other player turn, and damage has a short recovery window.
-- The player now begins with five health and two food. Caves contain more food and fewer monsters, most enemies pause after moving, detection ranges are shorter, damage recovery lasts longer, and Nest eggs take longer to hatch.
+- Most enemies pause after moving, detection ranges are short, damage recovery lasts longer, and Nest eggs take longer to hatch.
 
 ## Cave types
 

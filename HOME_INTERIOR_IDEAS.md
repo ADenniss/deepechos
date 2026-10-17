@@ -8,6 +8,8 @@
 - A crafting bench, forge, and glowing main cave gate.
 - Craftable crystal lamps that create extra pools of light.
 - Craftable tables, chairs, an echo rug, and display shelves.
+- Five residents with conversations and repeatable missions.
+- A craftable glow garden, map table, and echo monument.
 
 ## Ideas for future upgrades
 
